@@ -1,0 +1,195 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta content="minimum-scale=1.0, width=device-width" name="viewport"><meta name="description" content="Operation Methods"><title>Operation Methods - Stream.apex</title><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Roboto+Mono"><link rel="stylesheet" href="/stream-apex/vendor/galano/galano.css"><link rel="stylesheet" href="/stream-apex/vendor/icon-12/icon-12.css"><link rel="stylesheet" href="/stream-apex/vendor/icon-16/icon-16.css"><link rel="stylesheet" href="/stream-apex/vendor/senna/senna.css"><link rel="stylesheet" href="/stream-apex/vendor/codemirror/lib/codemirror.css"><link rel="stylesheet" href="/stream-apex/vendor/codemirror/theme/dracula.css"><script src="/stream-apex/js/bundles/shared.electric.js"></script><script src="/stream-apex/vendor/senna/senna.js"></script><script src="/stream-apex/vendor/codemirror/lib/codemirror.js"></script><script src="/stream-apex/vendor/codemirror/mode/css/css.js"></script><script src="/stream-apex/vendor/codemirror/mode/javascript/javascript.js"></script><script src="/stream-apex/vendor/codemirror/mode/xml/xml.js"></script><link rel="stylesheet" href="/stream-apex/styles/main.css"></head><body data-senna=""><div data-senna-surface="" id="wrapper"><div class="senna-loading-bar"></div><div id="pageComponent"><div class="main"><main class="guide"><div class="docs"><nav class="topbar topbar-light topbar-docs"><div class="topbar-logo"><a class="topbar-logo-link" href="/stream-apex"><span class="topbar-logo-icon icon-16-hammer"></span><h3 class="topbar-logo-text">Stream.apex</h3></a></div><nav class="topbar-menu"><button class="topbar-toggle">Menu</button><ul class="topbar-list"><li class="topbar-item"><a class="topbar-link topbar-link-selected" href="/stream-apex/docs/" target="undefined"><span>Docs</span></a></li><li class="topbar-item"><a class="topbar-link " href="/stream-apex/tutorials/getting_started/step_1.html" target="undefined"><span>Tutorials</span></a></li></ul></nav></nav><nav class="sidebar"><a class="sidebar-header toggler-header-collapsed"><span class="sidebar-icon icon-16-menu"></span><span>Docs Menu</span><span class="sidebar-icon-right"><span class="icon-12-arrow-down-short"></span><span class="icon-12-arrow-up-short"></span></span></a><div class="sidebar-toggler-content toggler-collapsed"><div class="sidebar-search"><div class="page-autocomplete"><div class="form-group"><div class="input-inner-addon input-inner-addon-right"><input autocomplete="off" class="form-control" name="q" placeholder="Search Docs" ref="input" required="" type="text"><span class="input-inner-icon-helper icon-16-magnifier"></span></div></div></div></div><nav class=""><ul class="sidebar-list sidebar-list-1"><li class="sidebar-item"><a class="sidebar-link " href="/stream-apex/docs/Stream/"><span class="sidebar-icon icon-16-flash"></span><span>Streams</span></a></li><li class="sidebar-item active"><a class="sidebar-link sidebar-link-selected" href="/stream-apex/docs/Methods/"><span class="sidebar-icon icon-16-code-file"></span><span>Methods</span></a><nav class=""><ul class="sidebar-list sidebar-list-1"><li class="sidebar-item"><a class="sidebar-link " href="/stream-apex/docs/Methods/creation.html"><span class="sidebar-icon icon-16-code-file"></span><span>Creation Methods</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/stream-apex/docs/Methods/funcs.html"><span class="sidebar-icon icon-16-code-file"></span><span>Functions</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/stream-apex/docs/Methods/subscription.html"><span class="sidebar-icon icon-16-code-file"></span><span>Subscription Methods</span></a></li><li class="sidebar-item active"><a class="sidebar-link sidebar-link-selected" href="/stream-apex/docs/Methods/operation.html"><span class="sidebar-icon icon-16-code-file"></span><span>Operation Methods</span></a></li></ul></nav></li><li class="sidebar-item"><a class="sidebar-link " href="/stream-apex/docs/Subject/"><span class="sidebar-icon icon-16-cloud"></span><span>Subject</span></a></li></ul></nav></div></nav><div class="sidebar-offset"><header class="guide-header"><div class="container-hybrid"><h1 class="title">Operation Methods Guide</h1></div></header><div class="container-hybrid"><div class="docs-guide row"><div class="docs-content col-xs-16 col-md-9"><div class="guide-content"><h6>Operation Methods</h6><article id="1"><h2>concatOther</h2><p>Concatenate the other streams</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.of(1)
+    .concatOther(new List<stream>{ Stream.with(2, 3) })
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 1
+// 2
+// 3
+// Completed</stream></code></pre></div><table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td>concatOther(List<stream>)</stream></td><td>Concat list of streams</td></tr><tr><td>concatOther(Stream)</td><td>Concat one stream</td></tr><tr><td>concatOther(Stream, Stream)</td><td>Concat two streams</td></tr><tr><td>concatOther(Stream, Stream, Stream)</td><td>Concat three streams</td></tr></tbody></table></article><article id="2"><h2>mapBy</h2><p>Map the Func over the stream elements</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .mapBy(R.inc)
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 2
+// 3
+// 4
+// Completed</code></pre></div></article><article id="3"><h2>flatMap</h2><p>Map the Func and flatten the stream</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .flatMap(Stream.Funcs.ofData.apply(4))
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 4
+// 4
+// 4
+// Completed</code></pre></div></article><article id="4"><h2>mapTo</h2><p>Map the element to the value</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .mapTo(4)
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 4
+// 4
+// 4
+// Completed</code></pre></div></article><article id="5"><h2>filter</h2><p>Filter the stream</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .filter(R.equals.apply(2))
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 2
+// Completed</code></pre></div></article><article id="6"><h2>scan</h2><p>Similar to 'reduce', but emit the intermediate results</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .scan(R.add, 0)
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 1
+// 3
+// 6
+// Completed</code></pre></div></article><article id="7"><h2>reduce</h2><p>Reduce over the stream elements</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .reduce(R.add, 0)
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 6
+// Completed</code></pre></div></article><article id="8"><h2>catchError</h2><p>Catch the error and return the recovered value</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.throwError('error')
+    .catchError(R.constant.apply('success'))
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// success
+// Completed</code></pre></div></article><article id="9"><h2>count</h2><p>Get the count of the stream items</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .count()
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 3
+// Completed</code></pre></div><table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td>count()</td><td>Count all</td></tr><tr><td>count(Func)</td><td>Count all that matches the predicate</td></tr></tbody></table></article><article id="10"><h2>defaultIfEmpty</h2><p>Set the default value if the stream is empty</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.empty()
+    .defaultIfEmpty(1)
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 1
+// Completed</code></pre></div></article><article id="11"><h2>distinct</h2><p>Get a stream of distinct values, according to the key calculated by the Func</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .distinct(R.mod.apply(R.placeholder, 2))
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 1
+// 2
+// Completed</code></pre></div><table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td>distinct()</td><td>Get a stream of distinct values</td></tr><tr><td>distinct(Func)</td><td>Get distinct values based on the compare Func that returns Boolean</td></tr></tbody></table></article><article id="12"><h2>distinctUntilChanged</h2><p>Get a stream of values, distinct from the last one</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 1)
+    .distinctUntilChanged(R.equals, R.identity)
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 1
+// 2
+// 1
+// Completed</code></pre></div><table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td>distinctUntilChanged(Func, Func)</td><td>Get distinct values based on compare Func and selector Func</td></tr><tr><td>distinctUntilChanged(Func)</td><td>Get distinct values based on selector Func</td></tr><tr><td>distinctUntilChanged()</td><td>Get distinct values</td></tr></tbody></table></article><article id="13"><h2>distinctUntilKeyChanged</h2><p>Get a stream of values, distinct from the last one by key value</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(new Map<string, object="">{ 'name' =&gt; 'a' }, new Map<string, object="">{ 'name' =&gt; 'a' })
+    .distinctUntilKeyChanged('name', R.equals)
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// {name=a}
+// Completed</string,></string,></code></pre></div><table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td>distinctUntilKeyChanged(String, Func)</td><td>Get distinct values based on key and compare Func</td></tr><tr><td>distinctUntilKeyChanged(String)</td><td>Get distinct values based on key</td></tr></tbody></table></article><article id="14"><h2>elementAt</h2><p>Get the Nth element, return default value if not found</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .elementAt(3, 4)
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 4
+// Completed</code></pre></div><table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td>elementAt(Integer, Object)</td><td>Get element at the index with default value</td></tr><tr><td>elementAt(Integer)</td><td>Get element at the index</td></tr></tbody></table></article><article id="15"><h2>every</h2><p>Check if every element matches the predicate</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .every(R.lt.apply(R.placeholder, 4))
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// true
+// Completed</code></pre></div></article><article id="16"><h2>join</h2><p>Flatten nested Streams</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, Stream.of(2), 3)
+    .join()
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 1
+// 2
+// 3
+// Completed</code></pre></div></article><article id="17"><h2>finalize</h2><p>Register a Func that will be called either after completion or error</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .finalize(R.debug.apply(4))
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 1
+// 2
+// 3
+// 4
+// Completed</code></pre></div></article><article id="18"><h2>find</h2><p>Find the first element that matches the predicate</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .find(R.equals.apply(2))
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 2
+// Completed</code></pre></div></article><article id="19"><h2>findIndex</h2><p>Find the index of the first element that matches the predicate</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .findIndex(R.equals.apply(2))
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 1
+// Completed</code></pre></div></article><article id="20"><h2>first</h2><p>Find the first element that matches the predicate, otherwise return the default value</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .first(R.equals.apply(4), 4)
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 4
+// Completed</code></pre></div><table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td>first(Func, Object)</td><td>Find the first matching with default value</td></tr><tr><td>first(Func)</td><td>Find the first matching</td></tr></tbody></table></article><article id="21"><h2>last</h2><p>Find the last element that matches the predicate, otherwise return the default value</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .last(R.equals.apply(4), 4)
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 4
+// Completed</code></pre></div><table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td>last(Func, Object)</td><td>Find the last matching with default value</td></tr><tr><td>last(Func)</td><td>Find the last matching</td></tr></tbody></table></article><article id="22"><h2>groupBy</h2><p>Group the elements into a map</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .groupBy(R.mod.apply(R.placeholder, 2))
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// {0=(2), 1=(1, 3)}
+// Completed</code></pre></div></article><article id="23"><h2>ignoreElements</h2><p>Create a stream that ignores all elements</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .ignoreElements()
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// Completed</code></pre></div></article><article id="24"><h2>isEmpty</h2><p>Check if the stream is empty</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .isEmpty()
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// false
+// Completed</code></pre></div></article><article id="25"><h2>max</h2><p>Get the max element according to the comparator Func that returns an Integer</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .max(R.compare)
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 3
+// Completed</code></pre></div><table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td>max(Func)</td><td>Get max value with the comparator Func returning Integer</td></tr><tr><td>max()</td><td>Get the max value</td></tr></tbody></table></article><article id="26"><h2>min</h2><p>Get the min element according to the comparator Func that returns an Integer</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .min(R.compare)
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 3
+// Completed</code></pre></div><table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td>min(Func)</td><td>Get min value with the comparator Func returning Integer</td></tr><tr><td>min()</td><td>Get the min value</td></tr></tbody></table></article><article id="27"><h2>onErrorResumeNext</h2><p>Like 'concat', but continue to the next stream only when the first stream has errors</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.throwError('error')
+    .onErrorResumeNext(new List<stream>{ Stream.of('success') })
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// success
+// Completed</stream></code></pre></div></article><article id="28"><h2>pairwise</h2><p>Make pairs from adjacent stream items</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .pairwise()
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// Pair:[fst=1, snd=2]
+// Pair:[fst=2, snd=3]
+// Completed</code></pre></div></article><article id="29"><h2>pluck</h2><p>Pluck the value from the stream elements</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(new Map<string, object="">{ 'name' =&gt; 'a' })
+    .pluck('name')
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// a
+// Completed</string,></code></pre></div></article><article id="30"><h2>repeat</h2><p>Repeat the stream for N times</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .repeat(2)
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 1
+// 2
+// 3
+// 1
+// 2
+// 3
+// Completed</code></pre></div></article><article id="31"><h2>single</h2><p>Get the single element from the stream that matches the predicate</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .single(R.equals.apply(2))
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 2
+// Completed</code></pre></div></article><article id="32"><h2>skip</h2><p>Skip N elements from the stream</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .skip(2)
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 3
+// Completed</code></pre></div></article><article id="33"><h2>skipLast</h2><p>Skip N elements from the last of the stream</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .skipLast(2)
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 1
+// Completed</code></pre></div></article><article id="34"><h2>skipWhile</h2><p>Skip elements while the predicate is true</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .skipWhile(R.lt.apply(R.placeholder, 3))
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 3
+// Completed</code></pre></div></article><article id="35"><h2>take</h2><p>Take the first N elements from the stream</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .take(2)
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 1
+// 2
+// Completed</code></pre></div></article><article id="36"><h2>takeLast</h2><p>Take the last N elements from the stream</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .takeLast(2)
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 2
+// 3
+// Completed</code></pre></div></article><article id="37"><h2>takeWhile</h2><p>Take elements while the predicate is true</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .takeWhile(R.lt.apply(R.placeholder, 3))
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 1
+// 2
+// Completed</code></pre></div></article><article id="38"><h2>startWith</h2><p>Append the other stream to the stream</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .startWith(Stream.of(0))
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 0
+// 1
+// 2
+// 3
+// Completed</code></pre></div></article><article id="39"><h2>tap</h2><p>Pass the value through the Func</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .tap(R.debug)
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// 1
+// 1
+// 2
+// 2
+// 3
+// 3
+// Completed</code></pre></div></article><article id="40"><h2>toArray</h2><p>Convert the strema elements to a list</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">Stream.with(1, 2, 3)
+    .toArray()
+    .subscribe(R.debug, R.debug.apply('Error: '), R.debug.apply('Completed'));
+// (1, 2, 3)
+// Completed</code></pre></div></article><input type="hidden" value="Operation Methods"><input type="hidden" value="Stream.apex"></div><div class="contribute"><div class="contribute-img"><span class="icon-16-github"></span></div><div class="contribute-text"><p>Contribute on Github! <a href="https://github.com/Click-to-Cloud/Stream.apex/tree/master/src/pages/docs/Methods/operation.md" class="contribute-link" target="_blank">Edit this section</a>.</p></div></div></div><nav class="col-xs-16 col-md-offset-2 col-md-5"><div class="docs-nav-container"><div class="affix-top docs-nav"><div ref="readingContainer"></div></div></div></nav></div></div></div></div></main></div></div><script src="/stream-apex/js/bundles/mipud.js"></script><script>var data = '{"pageLocation":"index.children.docs.children.Methods.children.operation","site":{"title":"Stream.apex","githubRepo":"Click-to-Cloud/Stream.apex","googleAnalytics":"","index":{"title":"Home","description":"Stream.apex is a library that streamlines your Funcs in Apex.","srcFilePath":"src/pages/index.soy","id":"pages","location":"/./","url":"/stream-apex/./","children":{"docs":{"title":"Docs","description":"Everything you need to know to get started.","srcFilePath":"src/pages/docs/index.soy","id":"docs","location":"/docs/","url":"/stream-apex/docs/","children":{"search":{"title":"Search","description":"Find what you\'re looking for in the documentation.","hidden":true,"srcFilePath":"src/pages/docs/search.soy","id":"search","location":"/docs/search.html","url":"/stream-apex/docs/search.html"},"Methods":{"children":{"creation":{"title":"Creation Methods","description":"Creation Methods","layout":"guide","icon":"code-file","weight":2,"srcFilePath":"src/pages/docs/Methods/creation.md","id":"creation","location":"/docs/Methods/creation.html","url":"/stream-apex/docs/Methods/creation.html"},"funcs":{"title":"Functions","description":"Functions","layout":"guide","icon":"code-file","weight":2,"srcFilePath":"src/pages/docs/Methods/funcs.md","id":"funcs","location":"/docs/Methods/funcs.html","url":"/stream-apex/docs/Methods/funcs.html"},"operation":{"title":"Operation Methods","description":"Operation Methods","layout":"guide","icon":"code-file","weight":4,"srcFilePath":"src/pages/docs/Methods/operation.md","id":"operation","location":"/docs/Methods/operation.html","url":"/stream-apex/docs/Methods/operation.html","active":true},"subscription":{"title":"Subscription Methods","description":"Subscription Methods","layout":"guide","icon":"code-file","weight":3,"srcFilePath":"src/pages/docs/Methods/subscription.md","id":"subscription","location":"/docs/Methods/subscription.html","url":"/stream-apex/docs/Methods/subscription.html"}},"title":"Methods","description":"Methods","layout":"guide","icon":"code-file","weight":2,"srcFilePath":"src/pages/docs/Methods/index.md","id":"Methods","location":"/docs/Methods/","url":"/stream-apex/docs/Methods/","childIds":["creation","funcs","subscription","operation"],"active":true},"Stream":{"title":"Streams","description":"Streams","layout":"guide","icon":"flash","weight":1,"srcFilePath":"src/pages/docs/Stream/index.md","id":"Stream","location":"/docs/Stream/","url":"/stream-apex/docs/Stream/"},"Subject":{"title":"Subject","description":"Subject","layout":"guide","icon":"cloud","weight":4,"srcFilePath":"src/pages/docs/Subject/index.md","id":"Subject","location":"/docs/Subject/","url":"/stream-apex/docs/Subject/"}},"childIds":["Stream","Methods","Subject","search"],"active":true},"tutorials":{"title":"Tutorials","description":"The tutorials","url":"/stream-apex/tutorials/getting_started/step_1.html","layout":false,"srcFilePath":"src/pages/tutorials/index.soy","id":"tutorials","location":"/tutorials/","customURL":true,"children":{"getting_started":{"title":"Getting Started","description":"The Getting Started Tutorial","tutorialTitle":"Getting started with Stream.apex","url":"/stream-apex/tutorials/getting_started/step_1.html","layout":false,"srcFilePath":"src/pages/tutorials/getting_started/index.soy","id":"getting_started","location":"/tutorials/getting_started/","customURL":true,"children":{"step_1":{"title":"Installation","description":"Include Apex files","buttonTitle":"Done","parentId":"getting_started","layout":"tutorial","time":90,"weight":1,"srcFilePath":"src/pages/tutorials/getting_started/step_1.md","id":"step_1","location":"/tutorials/getting_started/step_1.html","url":"/stream-apex/tutorials/getting_started/step_1.html"},"step_2":{"title":"Preliminary Knowledge","description":"Preliminary Knowledge","buttonTitle":"Done","parentId":"getting_started","layout":"tutorial","time":90,"weight":2,"srcFilePath":"src/pages/tutorials/getting_started/step_2.md","id":"step_2","location":"/tutorials/getting_started/step_2.html","url":"/stream-apex/tutorials/getting_started/step_2.html"},"step_3":{"title":"Create Streams","description":"Create Streams","buttonTitle":"Done","parentId":"getting_started","layout":"tutorial","time":90,"weight":3,"srcFilePath":"src/pages/tutorials/getting_started/step_3.md","id":"step_3","location":"/tutorials/getting_started/step_3.html","url":"/stream-apex/tutorials/getting_started/step_3.html"},"step_4":{"title":"Subscription","description":"Subscription","buttonTitle":"Done","parentId":"getting_started","layout":"tutorial","time":90,"weight":4,"srcFilePath":"src/pages/tutorials/getting_started/step_4.md","id":"step_4","location":"/tutorials/getting_started/step_4.html","url":"/stream-apex/tutorials/getting_started/step_4.html"},"step_5":{"title":"Lazy Streams","description":"Lazy Streams","buttonTitle":"Done","parentId":"getting_started","layout":"tutorial","time":90,"weight":5,"srcFilePath":"src/pages/tutorials/getting_started/step_5.md","id":"step_5","location":"/tutorials/getting_started/step_5.html","url":"/stream-apex/tutorials/getting_started/step_5.html"},"step_6":{"title":"Stream Operations","description":"Stream Operations","buttonTitle":"Done","parentId":"getting_started","layout":"tutorial","time":90,"weight":6,"srcFilePath":"src/pages/tutorials/getting_started/step_6.md","id":"step_6","location":"/tutorials/getting_started/step_6.html","url":"/stream-apex/tutorials/getting_started/step_6.html"},"step_7":{"title":"Subjects","description":"Subjects","buttonTitle":"Done","parentId":"getting_started","layout":"tutorial","time":90,"weight":7,"srcFilePath":"src/pages/tutorials/getting_started/step_7.md","id":"step_7","location":"/tutorials/getting_started/step_7.html","url":"/stream-apex/tutorials/getting_started/step_7.html"}},"childIds":["step_1","step_2","step_3","step_4","step_5","step_6","step_7"]}},"childIds":["getting_started"]}},"childIds":["docs","tutorials"]},"basePath":"/stream-apex","topbar":[{"href":"/stream-apex/docs/","label":"Docs","selected":true},{"href":"/stream-apex/tutorials/getting_started/step_1.html","label":"Tutorials"}]}}'; if (typeof electric !== 'undefined') {electric.init(data);}else {document.addEventListener('DOMContentLoaded', function() {electric.init(data);});}</script></div><script data-senna-track="permanent" src="/stream-apex/js/electric/electric.js"></script></body></html>
